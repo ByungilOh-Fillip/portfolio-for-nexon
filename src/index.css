@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@theme {
+  --color-game-dark: #0a0a0a;
+  --color-game-card: #171717;
+  --color-game-accent: #3b82f6;
+  --color-game-text: #f5f5f5;
+  --color-game-muted: #a3a3a3;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "Fira Code", monospace;
+}
+
+body {
+  background-color: var(--color-game-dark);
+  color: var(--color-game-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
