@@ -9,45 +9,45 @@ export default function Skills() {
     {
       category: 'Programming',
       items: [
-        { name: 'C++', level: t('구현', 'Implemented') },
-        { name: 'Java', level: t('구현', 'Implemented') },
-        { name: 'Kotlin', level: t('프로젝트 활용', 'Used in project') },
-        { name: 'TypeScript', level: t('프로젝트 활용', 'Used in project') }
+        { name: 'C++', level: t('Proficient (능숙)', 'Proficient') },
+        { name: 'Java', level: t('Proficient (능숙)', 'Proficient') },
+        { name: 'Kotlin', level: t('Experienced (경험)', 'Experienced') },
+        { name: 'TypeScript', level: t('Experienced (경험)', 'Experienced') }
       ]
     },
     {
       category: 'Engine',
       items: [
-        { name: 'Unreal Engine', level: t('구현', 'Implemented') },
-        { name: 'Blueprint', level: t('구현', 'Implemented') },
-        { name: 'StateTree', level: t('구현', 'Implemented') },
-        { name: 'Animation', level: t('프로젝트 활용', 'Used in project') },
-        { name: 'Material', level: t('프로젝트 활용', 'Used in project') }
+        { name: 'Unreal Engine', level: t('Proficient (능숙)', 'Proficient') },
+        { name: 'Blueprint', level: t('Proficient (능숙)', 'Proficient') },
+        { name: 'StateTree', level: t('Proficient (능숙)', 'Proficient') },
+        { name: 'Animation', level: t('Experienced (경험)', 'Experienced') },
+        { name: 'Material', level: t('Experienced (경험)', 'Experienced') }
       ]
     },
     {
       category: 'Systems',
       items: [
-        { name: 'AI', level: t('구현', 'Implemented') },
-        { name: 'HTTP / API / JSON', level: t('구현', 'Implemented') },
-        { name: 'Socket / WebSocket', level: t('구현', 'Implemented') },
-        { name: 'Database (MySQL)', level: t('이해도 / 학습', 'Understanding') }
+        { name: 'AI', level: t('Proficient (능숙)', 'Proficient') },
+        { name: 'HTTP / API / JSON', level: t('Proficient (능숙)', 'Proficient') },
+        { name: 'Socket / WebSocket', level: t('Proficient (능숙)', 'Proficient') },
+        { name: 'Database (SQLite / MySQL)', level: t('Proficient (능숙)', 'Proficient') }
       ]
     },
     {
       category: 'Collaboration',
       items: [
-        { name: 'Git / GitHub', level: t('구현', 'Implemented') },
-        { name: 'Issue / PR Workflow', level: t('구현', 'Implemented') },
-        { name: 'Team Development', level: t('구현', 'Implemented') }
+        { name: 'Git / GitHub', level: t('Proficient (능숙)', 'Proficient') },
+        { name: 'Issue / PR Workflow', level: t('Proficient (능숙)', 'Proficient') },
+        { name: 'Team Development', level: t('Proficient (능숙)', 'Proficient') }
       ]
     },
     {
       category: 'Tools',
       items: [
-        { name: 'MCP', level: t('프로젝트 활용', 'Used in project') },
-        { name: 'Automation', level: t('프로젝트 활용', 'Used in project') },
-        { name: 'Developer Tools', level: t('프로젝트 활용', 'Used in project') }
+        { name: 'MCP', level: t('Experienced (경험)', 'Experienced') },
+        { name: 'Automation', level: t('Experienced (경험)', 'Experienced') },
+        { name: 'Developer Tools', level: t('Experienced (경험)', 'Experienced') }
       ]
     }
   ];
@@ -73,8 +73,8 @@ export default function Skills() {
                   <li key={i} className="flex justify-between items-center">
                     <span className="text-game-muted">{skill.name}</span>
                     <span className={`text-xs font-mono px-2 py-1 rounded ${
-                      skill.level === t('구현', 'Implemented') ? 'bg-blue-900/50 text-blue-300' :
-                      skill.level === t('프로젝트 활용', 'Used in project') ? 'bg-purple-900/50 text-purple-300' :
+                      skill.level === t('Proficient (능숙)', 'Proficient') ? 'bg-blue-900/50 text-blue-300' :
+                      skill.level === t('Experienced (경험)', 'Experienced') ? 'bg-purple-900/50 text-purple-300' :
                       'bg-gray-800 text-gray-400'
                     }`}>
                       {skill.level}

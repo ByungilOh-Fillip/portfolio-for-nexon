@@ -27,7 +27,7 @@ export default function Hero() {
             <Briefcase size={24} />
             <span>GitHub</span>
           </a>
-          <a href="mailto:your.email@example.com" className="flex items-center gap-2 text-game-muted hover:text-white transition-colors">
+          <a href="mailto:dhquddlf5@gmail.com" className="flex items-center gap-2 text-game-muted hover:text-white transition-colors">
             <Mail size={24} />
             <span>Contact</span>
           </a>

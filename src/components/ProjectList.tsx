@@ -30,17 +30,10 @@ export default function ProjectList() {
       focus: ['Java', 'Socket', 'CS fundamentals'],
       thumbnail: '',
     },
-    {
-      id: 'lar',
-      number: '06',
-      title: 'Project LAR',
-      subtitle: t("Boss Character를 직접 제작하고 Unreal Engine에 통합하여 실제 게임 콘텐츠로 구현한 프로젝트.", "A project where I created a Boss Character and integrated it into Unreal Engine as real game content."),
-      focus: ['Boss', 'Animation', 'Unreal Integration'],
-      thumbnail: '',
-    },
+    
     {
       id: 'material',
-      number: '07',
+      number: '06',
       title: 'Material Helper',
       subtitle: t("반복적인 개발 작업을 줄이기 위해 Material 관련 workflow를 자동화한 developer tool.", "A developer tool that automated Material workflows to reduce repetitive tasks."),
       focus: ['Tool Development', 'Automation', 'Developer Productivity'],
