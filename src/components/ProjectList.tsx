@@ -8,7 +8,7 @@ export default function ProjectList() {
   const projects = [
     {
       id: 'aire',
-      number: '03',
+      number: '01',
       title: 'AIRE',
       subtitle: t("AI Companion 기반 Open-World Survival Game. Unreal Engine 5.8 기반.", "AI Companion based Open-World Survival Game, built on Unreal Engine 5.8."),
       focus: ['AI', 'AI Server', 'Gameplay', 'StateTree'],
@@ -16,7 +16,7 @@ export default function ProjectList() {
     },
     {
       id: 'palworld',
-      number: '04',
+      number: '02',
       title: 'PalWorld',
       subtitle: t("Unreal Engine 기반 Multiplayer 프로젝트를 통해 Client / Server 구조와 팀 개발 workflow를 경험한 프로젝트.", "An Unreal Engine-based Multiplayer project focused on Client/Server architecture and team development workflows."),
       focus: ['Multiplayer', 'Replication', 'RPC', 'Network Debugging'],
@@ -24,7 +24,7 @@ export default function ProjectList() {
     },
     {
       id: 'socket',
-      number: '05',
+      number: '03',
       title: 'Socket TODO Server',
       subtitle: t("Java를 활용한 Client/Server 통신 및 CS 기초 역량 증명", "Demonstration of CS fundamentals and Client/Server communication using Java."),
       focus: ['Java', 'Socket', 'CS fundamentals'],
@@ -33,7 +33,7 @@ export default function ProjectList() {
     
     {
       id: 'material',
-      number: '06',
+      number: '04',
       title: 'Material Helper',
       subtitle: t("반복적인 개발 작업을 줄이기 위해 Material 관련 workflow를 자동화한 developer tool.", "A developer tool that automated Material workflows to reduce repetitive tasks."),
       focus: ['Tool Development', 'Automation', 'Developer Productivity'],

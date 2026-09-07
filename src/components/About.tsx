@@ -21,7 +21,7 @@ export default function About() {
           <div>
             <h3 className="text-2xl font-bold mb-4 text-white">{t('저는 이런 개발자입니다', 'Who I am')}</h3>
             <p className="text-game-muted text-lg leading-relaxed mb-6">
-              {t('좋은 코드는 훌륭한 게임플레이를 만들기 위한 도구라고 믿는 게임 프로그래머입니다. 게임 시스템을 깊이 있게 이해하고, C++과 언리얼 엔진을 활용해 효율적으로 구현하며, 팀 환경에서 가장 어려운 기술적 난제에 도전합니다.', 'I am a Game Programmer who believes that good code is a tool to create great gameplay. I strive to understand game systems deeply, implement them efficiently in C++ and Unreal Engine, and tackle the hardest technical challenges within a team environment.')}
+              {t('탄탄한 기본기 위에 확장성 있는 시스템을 설계하는 것을 목표로 하는 클라이언트 프로그래머입니다. 단순히 표면적인 버그를 덮는 것에 그치지 않고, 문제가 발생하면 언리얼 엔진의 내부 소스 코드(Engine Code)를 직접 분석하여 근본적인 원인을 파악하고 해결하는 과정을 중요하게 생각합니다.', 'I am a Client Programmer aiming to design scalable systems on a solid foundation. Rather than simply patching superficial bugs, when issues arise, I value the process of diving directly into Unreal Engine internal source code to identify and resolve the root cause.')}
             </p>
             <h3 className="text-2xl font-bold mb-4 mt-8 text-white">{t('AI 보조 개발 (AI-Assisted Development)', 'AI-Assisted Development')}</h3>
             <div className="bg-game-card p-6 rounded-lg border border-game-card">

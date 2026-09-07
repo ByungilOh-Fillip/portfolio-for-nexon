@@ -12,14 +12,16 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="text-game-accent font-mono mb-4">{t('안녕하세요, 저는', 'Hello, I am')}</h2>
+        <h2 className="text-game-accent font-mono mb-4 text-lg md:text-xl">
+          {t('탄탄한 기초 위에 확장성 있는 시스템을 설계하는', 'Designing scalable systems on a solid foundation,')}
+        </h2>
         <h1 className="text-5xl md:text-7xl font-bold mb-4 text-white">Game Programmer.</h1>
-        <h3 className="text-3xl md:text-5xl text-game-muted font-bold mb-8">
-          {t('시스템을 설계하고, 문제를 해결합니다.', 'Building systems, solving problems.')}
+        <h3 className="text-3xl md:text-4xl text-game-muted font-bold mb-8">
+          {t('데이터 주도 설계와 네트워크 동기화에 집중합니다.', 'Focused on Data-Driven Design & Network Synchronization.')}
         </h3>
         
-        <p className="text-game-muted max-w-2xl text-lg mb-12">
-          {t('C++과 언리얼 엔진(Unreal Engine)을 전문으로 다룹니다. 견고한 게임플레이 시스템, AI, 네트워크 아키텍처를 설계하며 팀원들과 협업하여 가상 세계를 완성합니다.', 'I specialize in C++ and Unreal Engine. My focus is on developing robust Gameplay Systems, AI, and Network Architecture, collaborating effectively to bring virtual worlds to life.')}
+        <p className="text-game-muted max-w-2xl text-lg mb-12 leading-relaxed">
+          {t('Unreal Engine 5와 C++ 기반의 게임 클라이언트 개발에 주력하고 있습니다. 단순한 하드코딩을 지양하고 확장성 있는 게임플레이 아키텍처를 고민하며, 멀티플레이어 환경에서의 상태 동기화나 복잡한 시스템 분리 같은 깊이 있는 기술적 챌린지를 즐깁니다.', 'I specialize in game client development using Unreal Engine 5 and C++. I avoid simple hardcoding in favor of thinking through scalable gameplay architectures, and I thoroughly enjoy deep technical challenges such as state synchronization in multiplayer environments and separating complex systems.')}
         </p>
 
         <div className="flex gap-6">
