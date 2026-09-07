@@ -6,11 +6,84 @@ import Mermaid from '../components/Mermaid';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useEffect } from 'react';
 import erdMemoryImg from '../assets/erd_memory.png';
-import aiCommandGatewayImg from '../assets/ai_command_gateway.png';
-import dddWeaponImg from '../assets/ddd_weapon.png';
-import dddItemImg from '../assets/ddd_item.png';
 import materialHelperHeroImg from '../assets/material_helper_hero.png';
 import aireMaterialUsageImg from '../assets/aire_material_usage.png';
+
+const aireGatewayChart = `flowchart LR
+    A["BT_AI (Behavior Tree)"] -->|Task Request| B["AI Controller"]
+    B -->|Command| C["Command Gateway (C++)"]
+    C -->|Execute| D["Movement / Attack / Skill"]
+    C -->|Update State| E["BlackBoard"]
+    E -->|Condition Check| A`;
+
+const aireWeaponChart = `flowchart TD
+    subgraph DataLayer
+        DT_Weapon["DataTable (Weapon_DT)"]
+        DA_Weapon["DataAsset (UWeaponData)"]
+        DT_Weapon -->|Rows to Assets| DA_Weapon
+    end
+    
+    subgraph LogicLayer
+        WP_Base["AWeaponBase (C++)"]
+        WP_Melee["AWeapon_Melee"]
+        WP_Range["AWeapon_Range"]
+        WP_Base --> WP_Melee
+        WP_Base --> WP_Range
+    end
+    
+    DA_Weapon -->|Injected into| WP_Base`;
+
+const aireItemChart = `flowchart TD
+    subgraph ItemData
+        DA_Item["UItemData (DataAsset)"]
+        Mesh["Static Mesh"]
+        Icon["UI Icon (Texture2D)"]
+        Stat["Effect Stats"]
+        DA_Item -->|Includes| Mesh
+        DA_Item -->|Includes| Icon
+        DA_Item -->|Includes| Stat
+    end
+    
+    subgraph System
+        InvComp["UInventoryComponent"]
+        InvComp -->|Array of| DA_Item
+    end
+    
+    subgraph UI
+        UI_Inv["WBP_Inventory"]
+        UI_Inv -->|Reads Icon / Name| InvComp
+    end`;
+
+const palArchChart = `flowchart TD
+    subgraph DataLayer
+        DA_Pal["UDataAsset (UPalData)"]
+        Stats["Base Stats, Model, Type"]
+        DA_Pal -->|Defines| Stats
+    end
+    
+    subgraph RuntimeLayer
+        AC_Pal["UPalComponent (Actor Component)"]
+        HP["Current HP, Status"]
+        Tags["Gameplay Tags"]
+        AC_Pal -->|Manages| HP
+        AC_Pal -->|Uses| Tags
+    end
+    
+    DA_Pal -->|Loaded by| AC_Pal
+    Clients["Client Proxies"]
+    AC_Pal -->|Replicated to| Clients`;
+
+const socketArchChart = `flowchart LR\n    A["Client"] -->|"Socket Request"| B["Server"]\n    B -->|"Business Request"| C["DAO"]\n    C --> D[("MariaDB")]\n\n    D --> C\n    C --> B\n    B -->|"Socket Response"| A`;
+
+const socketFlowChart = `sequenceDiagram\n    participant Client\n    participant Server\n\n    Client->>Server: "1" (Read Request)\n    Note over Server: TODO Fetch (DB)\n    Server-->>Client: TODO Data\n    Server-->>Client: EOF (End of Message)\n\n    Client->>Server: "3" (Create Request)\n    Note over Server: TODO Insert (DB)\n    Server-->>Client: "Success" Message\n    Server-->>Client: EOF (End of Message)`;
+
+const materialArchChart = `flowchart LR
+    A["React UI"] --> B["React Flow<br/>Material Graph"]
+    B --> C["Material<br/>Interpreter"]
+    C --> D["Three.js<br/>Visualizer"]
+    B --> E["UE5 T3D<br/>Exporter"]
+    E --> F["Unreal Engine"]`;
+
 
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
@@ -23,6 +96,13 @@ export default function ProjectDetail() {
   const renderProjectContent = () => {
     switch(id) {
       case 'aire':
+
+
+
+
+
+
+
         const imgAireHitDetection = "";
         const imgAireAnimNotify = "";
         const imgAireDebug = "";
@@ -157,7 +237,7 @@ export default function ProjectDetail() {
                 href="https://www.erdcloud.com/d/F8ByrHqChxHXfpqao" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="w-full h-64 md:h-[500px] bg-black border border-game-muted/20 rounded-xl overflow-hidden flex items-center justify-center relative group block"
+                className="w-full h-64 md:h-[500px] bg-black border border-game-muted/20 rounded-xl overflow-hidden flex items-center justify-center relative group"
               >
                 <img src={erdMemoryImg} alt="Memory ERD" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
@@ -183,7 +263,7 @@ export default function ProjectDetail() {
               </div>
 
               <div className="w-full bg-white/5 border border-game-muted/20 rounded-xl overflow-hidden flex items-center justify-center">
-                <img src={aiCommandGatewayImg} alt="AI Command Gateway" className="w-full h-auto object-contain p-4" />
+                <Mermaid chart={aireGatewayChart} />
               </div>
             </div>
 
@@ -202,14 +282,14 @@ export default function ProjectDetail() {
                 <p><strong className="text-green-400">Solution:</strong> {t("DataTable과 DataAsset 기반으로 Weapon Definition 및 Item Definition을 구성하여 게임 콘텐츠와 실행 로직을 완전히 분리했습니다. 빌드 없이 에디터 내에서 데이터 설정만으로 콘텐츠를 확장 가능하게 했습니다.", "Separated logic and content by creating Definitions via DataTable/DataAsset. Allowed content expansion purely through data configuration in the editor without rebuilding.")}</p>
               </div>
 
-              <div className="grid grid-cols-1 gap-6">
+              <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
                 <div className="w-full bg-white/5 border border-game-muted/20 rounded-xl overflow-hidden flex flex-col items-center justify-center p-6">
                   <span className="text-game-accent font-mono text-xs mb-4 text-left w-full">▼ Weapon Data-Driven Architecture</span>
-                  <img src={dddWeaponImg} alt="Weapon DDD" className="w-full h-auto object-contain" />
+                  <Mermaid chart={aireWeaponChart} />
                 </div>
                 <div className="w-full bg-white/5 border border-game-muted/20 rounded-xl overflow-hidden flex flex-col items-center justify-center p-6">
                   <span className="text-game-accent font-mono text-xs mb-4 text-left w-full">▼ Item & Recipe Data-Driven Architecture</span>
-                  <img src={dddItemImg} alt="Item DDD" className="w-full h-auto object-contain" />
+                  <Mermaid chart={aireItemChart} />
                 </div>
               </div>
             </div>
@@ -284,10 +364,12 @@ export default function ProjectDetail() {
           </ProjectSection>
         );
 case 'palworld':
+
+
+
         // 이미지 경로 변수 (이미지가 준비되면 여기에 경로를 입력하세요. 예: '/assets/palworld_issue.png')
         // 값이 없으면 화면에 렌더링되지 않습니다.
         const imgPalworldHero = ""; 
-        const imgPalworldArch = ""; 
         const imgPalworldTag = ""; 
         const imgPalworldIssue = ""; 
 
@@ -374,11 +456,10 @@ case 'palworld':
                 <p className="mb-3"><strong className="text-red-400">Problem:</strong> {t("Pal마다 서로 다른 데이터와 상태를 가져서, 캐릭터 내부에 모든 데이터를 직접 관리하면 Pal 종류가 증가할수록 코드 복잡도가 폭발적으로 증가할 수 있었습니다.", "Managing all varying data inside the Character directly risked explosive code complexity as Pal types increased.")}</p>
                 <p><strong className="text-green-400">Solution:</strong> {t("기본 능력치, 스킬 등 고정적인 정보는 DataAsset으로, Runtime에서 변화하는 상태는 Character와 Component에서 관리하도록 완전히 분리했습니다. 이를 통해 기존 시스템 코드 수정 없이 DataAsset 추가만으로 새로운 Pal을 확장할 수 있었습니다.", "Completely separated fixed info into DataAssets and mutable states into runtime components, enabling new Pal expansions just by adding DataAssets without touching system code.")}</p>
               </div>
-              {imgPalworldArch && (
-                <div className="w-full bg-black border border-game-muted/20 rounded-xl overflow-hidden mt-4">
-                  <img src={imgPalworldArch} alt="Architecture" className="w-full h-auto object-contain" />
-                </div>
-              )}
+              <div className="w-full bg-black/80 border border-game-muted/20 rounded-xl overflow-hidden mt-4 p-6 flex flex-col justify-center items-center">
+                <span className="text-game-accent font-mono text-xs mb-4 w-full">▼ Data & Runtime Architecture (Mermaid)</span>
+                <Mermaid chart={palArchChart} />
+              </div>
             </div>
 
             <div className="bg-game-card p-8 rounded-xl border border-game-card/50 mb-12">
@@ -439,9 +520,9 @@ case 'palworld':
           </ProjectSection>
         );
       case 'socket':
-const socketArchChart = `flowchart LR\n    A["Client"] -->|"Socket Request"| B["Server"]\n    B -->|"Business Request"| C["DAO"]\n    C --> D[("MariaDB")]\n\n    D --> C\n    C --> B\n    B -->|"Socket Response"| A`;
 
-const socketFlowChart = `sequenceDiagram\n    participant Client\n    participant Server\n\n    Client->>Server: "1" (Read Request)\n    Note over Server: TODO Fetch (DB)\n    Server-->>Client: TODO Data\n    Server-->>Client: EOF (End of Message)\n\n    Client->>Server: "3" (Create Request)\n    Note over Server: TODO Insert (DB)\n    Server-->>Client: "Success" Message\n    Server-->>Client: EOF (End of Message)`;
+
+
 
         return (
           <ProjectSection 
@@ -535,12 +616,7 @@ const socketFlowChart = `sequenceDiagram\n    participant Client\n    participan
           </ProjectSection>
         );
 case 'material':
-        const materialArchChart = `flowchart LR
-    A["React UI"] --> B["React Flow<br/>Material Graph"]
-    B --> C["Material<br/>Interpreter"]
-    C --> D["Three.js<br/>Visualizer"]
-    B --> E["UE5 T3D<br/>Exporter"]
-    E --> F["Unreal Engine"]`;
+        
 
         return (
           <ProjectSection 

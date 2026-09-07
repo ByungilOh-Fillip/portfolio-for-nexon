@@ -10,7 +10,7 @@ function Nav() {
 
   return (
     <nav className="fixed top-0 w-full bg-game-dark/80 backdrop-blur-md border-b border-game-card z-50 px-8 py-4 flex justify-between items-center">
-      <Link to="/" className="font-mono font-bold text-xl text-white">Portfolio<span className="text-game-accent">.</span></Link>
+      <Link to="/" className="font-mono font-bold text-xl text-white">Oh Byungil<span className="text-game-accent">.</span></Link>
       <div className="flex items-center gap-6">
         {isHome && (
           <div className="hidden md:flex gap-6 text-sm font-mono">

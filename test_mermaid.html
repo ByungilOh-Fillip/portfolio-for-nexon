@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div class="mermaid">
+flowchart TD
+    subgraph Data [Data Layer]
+        DT_Weapon["DataTable (Weapon_DT)"]
+        DA_Weapon["DataAsset (UWeaponData)"]
+        DT_Weapon -.->|Rows to Assets| DA_Weapon
+    end
+    
+    subgraph Logic [Logic Layer]
+        WP_Base["AWeaponBase (C++)"]
+        WP_Melee["AWeapon_Melee"]
+        WP_Range["AWeapon_Range"]
+        WP_Base --> WP_Melee
+        WP_Base --> WP_Range
+    end
+    
+    DA_Weapon -->|Injected into| WP_Base
+</div>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true });
+</script>
+</body>
+</html>
