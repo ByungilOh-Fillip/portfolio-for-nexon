@@ -5,6 +5,9 @@ import { ProjectSection } from '../components/ProjectSection';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useEffect } from 'react';
 import erdMemoryImg from '../assets/erd_memory.png';
+import aiCommandGatewayImg from '../assets/ai_command_gateway.png';
+import dddWeaponImg from '../assets/ddd_weapon.png';
+import dddItemImg from '../assets/ddd_item.png';
 
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
@@ -38,10 +41,10 @@ export default function ProjectDetail() {
             </div>
 
             {/* 1. 프로젝트 개요 (Overview) */}
-            <div className="bg-game-card p-8 rounded-xl border border-game-card/50 mb-12">
+            <div className="bg-game-card p-8 rounded-xl border border-game-card/50 mb-8">
               <h3 className="text-2xl font-bold mb-4 text-white border-b border-game-muted/30 pb-2">{t("1. 프로젝트 개요", "1. Project Overview")}</h3>
               
-              <div className="mb-8">
+              <div className="mb-6">
                 <h4 className="font-bold text-game-accent mb-2">{t("어떤 프로젝트인가요?", "What is this project?")}</h4>
                 <p className="text-game-muted text-sm leading-relaxed mb-4">
                   {t("Unreal Engine 5.8 기반의 오픈월드 생존 게임으로, 플레이어와 능동적으로 상호작용하는 AI Companion 'MAKO'가 핵심인 프로젝트입니다. 채집, 제작, 사냥, 전투 등의 생존 요소뿐만 아니라, AI와의 실시간 대화, AI 직접 조작, 그리고 AI에게 채집이나 제작을 요청하는 심도 있는 상호작용이 가능합니다.", "An Unreal Engine 5.8 open-world survival game centered around 'MAKO', an active AI Companion. It features survival elements like gathering, crafting, hunting, and combat, alongside deep interactions such as real-time AI conversation, direct AI control, and delegating gathering/crafting tasks to the AI.")}
@@ -50,87 +53,61 @@ export default function ProjectDetail() {
                   <strong className="text-white">{t("멀티플랫폼 연동:", "Multi-platform Integration:")}</strong> {t("게임 내부뿐만 아니라 카카오톡, 디스코드, 자체 제작 웹페이지를 통해서도 게임 밖에서 AI와 대화하고 명령을 내릴 수 있도록 연동되어 있습니다.", "Interactions aren't limited to in-game; you can chat with and send commands to the AI externally via KakaoTalk, Discord, and a custom web page.")}
                 </p>
               </div>
-              
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-sm">
-                <div className="bg-game-dark p-4 rounded border border-game-muted/20">
-                  <span className="text-game-accent font-mono block mb-1">Team</span>
+
+              <div className="bg-game-dark p-4 rounded border border-game-muted/20 flex flex-col md:flex-row gap-6 text-sm">
+                <div className="flex-1">
+                  <span className="text-game-accent font-mono block mb-1">Team Size</span>
                   <span className="text-white">3명 (3 Members)</span>
                 </div>
-                <div className="bg-game-dark p-4 rounded border border-game-muted/20 md:col-span-2">
-                  <span className="text-game-accent font-mono block mb-1">My Role</span>
-                  <span className="text-white">{t("플레이어 파트 개발, 레벨 디자인, DB 설계(AI 장기기억), 프로젝트 관리", "Player Dev, Level Design, DB Design, PM")}</span>
+                <div className="flex-1">
+                  <span className="text-game-accent font-mono block mb-1">Project Tech Stack</span>
+                  <span className="text-white">UE 5.8, FastAPI, LangGraph, SQLite</span>
                 </div>
-                <div className="bg-game-dark p-4 rounded border border-game-muted/20 md:col-span-2">
-                  <span className="text-game-accent font-mono block mb-1">Tech Stack</span>
-                  <span className="text-white">UE 5.8, C++, StateTree, GAS, FastAPI, SQLite</span>
+                <div className="flex-1">
+                  <span className="text-game-accent font-mono block mb-1">GitHub Repository</span>
+                  <a href="https://github.com/ByungilOh-Fillip/portfolio-for-nexon" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 underline">{t("소스코드 확인하기 (Link)", "View Source Code")}</a>
                 </div>
               </div>
             </div>
 
-            {/* 2. 담당 업무 (Responsibilities) */}
-            <h3 className="text-2xl font-bold mb-6 text-white border-b border-game-muted/30 pb-4">{t("2. 주요 구현 시스템", "2. Core Implemented Systems")}</h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-              <div className="bg-game-dark p-6 rounded-lg border border-game-muted/20">
-                <h4 className="font-bold text-game-accent mb-4">🧠 AI Companion</h4>
-                <ul className="list-disc list-inside text-game-muted text-sm space-y-2">
-                  <li>StateTree 기반 AI 행동 구조 (Follow/Combat/Work 등)</li>
-                  <li>AI Perception 기반 Threat 처리 및 우선순위 판단</li>
-                  <li>외부 AI Server(Backend) 실시간 연동</li>
-                </ul>
-              </div>
-              <div className="bg-game-dark p-6 rounded-lg border border-game-muted/20">
-                <h4 className="font-bold text-game-accent mb-4">⚔️ Gameplay & Combat</h4>
-                <ul className="list-disc list-inside text-game-muted text-sm space-y-2">
-                  <li>GAS(Gameplay Ability System) 기반 Ability/Effect 처리</li>
-                  <li>무기 궤적 기반 근접 전투 및 연속 Hit 판정</li>
-                  <li>Equipment, Inventory, WorkOrder 제작 시스템</li>
-                </ul>
-              </div>
-              <div className="bg-game-dark p-6 rounded-lg border border-game-muted/20">
-                <h4 className="font-bold text-game-accent mb-4">📡 AI Communication & Data</h4>
-                <ul className="list-disc list-inside text-game-muted text-sm space-y-2">
-                  <li>JSON 기반 통신 및 AI Command Gateway 구축</li>
-                  <li>Long-term Memory 연동 (Game Context 저장 및 조회)</li>
-                </ul>
-              </div>
-              <div className="bg-game-dark p-6 rounded-lg border border-game-muted/20">
-                <h4 className="font-bold text-game-accent mb-4">🎬 Animation</h4>
-                <ul className="list-disc list-inside text-game-muted text-sm space-y-2">
-                  <li>Linked Anim Layer & Montage 시스템 적용</li>
-                  <li>AnimNotify State 기반 공격 타이밍/판정 동기화</li>
-                </ul>
+            {/* 2. 담당 역할 및 기여도 (My Role & Contributions) */}
+            <div className="bg-game-card p-8 rounded-xl border border-game-accent/30 mb-12 relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-1 h-full bg-game-accent"></div>
+              <h3 className="text-2xl font-bold mb-6 text-white border-b border-game-muted/30 pb-4">{t("2. 담당 역할 및 기여도", "2. My Role & Contributions")}</h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+                <div>
+                  <h4 className="font-bold text-white mb-2">{t("핵심 담당 역할 (Role)", "Core Role")}</h4>
+                  <p className="text-game-accent text-sm mb-4">
+                    {t("클라이언트 로직 전담, UI/UX 구현, DB 설계(AI 장기기억), 레벨 디자인, 프로젝트 관리", "Client Logic, UI/UX, DB Design, Level Design, PM")}
+                  </p>
+                  
+                  <h4 className="font-bold text-white mb-2">{t("기여도 (Contribution)", "Contribution")}</h4>
+                  <p className="text-game-muted text-sm mb-4">
+                    {t("Unreal Engine 클라이언트 아키텍처 및 게임플레이 로직 100% 구현", "Implemented 100% of Unreal Engine client architecture and gameplay logic")}
+                  </p>
+
+                  <h4 className="font-bold text-white mb-2">{t("사용 기술 (My Tech Stack)", "My Tech Stack")}</h4>
+                  <p className="text-game-muted text-sm">
+                    C++, Unreal Engine 5.8, StateTree, GAS, UMG, JSON
+                  </p>
+                </div>
+                
+                <div className="bg-game-dark p-6 rounded-lg border border-game-muted/20">
+                  <h4 className="font-bold text-game-accent mb-4">{t("내가 직접 구현한 핵심 시스템", "Systems I Actually Implemented")}</h4>
+                  <ul className="list-disc list-inside text-game-muted text-sm space-y-3">
+                    <li><strong className="text-white">Player & Combat:</strong> GAS 기반 전투, 연속 타격 판정, 인벤토리/제작 시스템 구현</li>
+                    <li><strong className="text-white">Companion AI:</strong> StateTree & AI Perception 기반 AI 아키텍처 설계 및 행동 패턴 구현</li>
+                    <li><strong className="text-white">UI / UX:</strong> UMG를 활용하여 플레이어 상태, 인벤토리, 제작 시스템 등 핵심 게임플레이 HUD 및 인터페이스 구현 (AI 상호작용 UI 제외)</li>
+                    <li><strong className="text-white">AI Communication:</strong> Backend 연동 시스템 구축(JSON) 및 장기기억을 위한 DB 스키마 설계</li>
+                  </ul>
+                </div>
               </div>
             </div>
 
-            {/* 3. Companion AI Architecture */}
+            {/* 3. AI Communication & Memory */}{/* 3. AI Communication & Memory */}
             <div className="bg-game-card p-8 rounded-xl border border-game-card/50 mb-8">
-              <h4 className="text-xl font-bold text-white mb-2">3. Companion AI Architecture</h4>
-              <div className="flex flex-col lg:flex-row gap-8 mb-4">
-                <div className="w-full lg:w-1/2 h-64 bg-game-dark border border-game-muted/20 rounded flex items-center justify-center">
-                  <span className="text-game-muted text-sm">{t("📌 [이미지 삽입] StateTree 로직 또는 AI 아키텍처 다이어그램", "StateTree / Architecture Diagram")}</span>
-                </div>
-                <div className="w-full lg:w-1/2 flex flex-col justify-center">
-                  <div className="bg-game-dark p-4 rounded border border-game-muted/20 text-sm mb-4">
-                    <p className="mb-2"><strong className="text-red-400">Problem:</strong> {t("기존의 단순 상태 머신(FSM) 방식으로는 채집, 전투, 후퇴 등 복잡하게 얽힌 AI의 상황 판단 우선순위를 체계적으로 관리하기가 매우 어려웠습니다.", "Managing complex AI priority using traditional FSM led to unmanageable states.")}</p>
-                    <p><strong className="text-green-400">Solution:</strong> {t("AI Perception(인지) → StateTree(상황 판단 및 우선순위) → GAS(실제 스킬/동작 실행) 로 이어지는 '판단과 실행의 분리 구조'를 설계하여 유연하고 확장성 높은 AI를 구축했습니다.", "Designed a 'Decision-Execution separation' structure: Perception -> StateTree -> GAS. This created a highly scalable AI brain.")}</p>
-                  </div>
-                  <pre className="text-game-accent font-mono text-xs">
-{`AI Perception (Threat Target) 
-  ↓ 
-StateTree (Evaluate Priority) 
-  ↓ 
-Behavior Selection (Event) 
-  ↓ 
-GAS Ability (Execution)`}
-                  </pre>
-                </div>
-              </div>
-            </div>
-
-            {/* 4. AI Communication & Memory */}
-            <div className="bg-game-card p-8 rounded-xl border border-game-card/50 mb-8">
-              <h4 className="text-xl font-bold text-white mb-4">4. AI Communication & DB Schema (Long-term Memory)</h4>
+              <h4 className="text-xl font-bold text-white mb-4">3. AI Communication & DB Schema (Long-term Memory)</h4>
               
               <div className="mb-6">
                 <p className="text-game-muted text-sm mb-2">
@@ -164,41 +141,57 @@ GAS Ability (Execution)`}
               </a>
             </div>
 
-            {/* 5. Command Gateway & 6. Data-Driven */}
-            <div className="grid grid-cols-1 gap-8 mb-8">
-              <div className="bg-game-card p-8 rounded-xl border border-game-card/50 flex flex-col md:flex-row gap-8">
-                <div className="flex-1">
-                  <h4 className="text-xl font-bold text-white mb-2">5. AI Command Gateway</h4>
-                  <div className="bg-game-dark p-4 rounded border border-game-muted/20 mb-4 text-sm">
-                    <p className="mb-2"><strong className="text-red-400">Problem:</strong> {t("LLM이 게임 상태를 무시하고 불가능한 명령(환각)을 생성하여 게임 안정성을 해칠 수 있었습니다.", "LLMs generated impossible commands (hallucinations) ignoring game state, breaking stability.")}</p>
-                    <p><strong className="text-green-400">Solution:</strong> {t("LLM의 출력은 실제 게임 명령이 아닌 Command Candidate로만 취급하고, 언리얼 엔진 내부에서 거리, 대상, 인벤토리, 중복 여부 등을 재검증하는 'Gateway 구조'를 설계하여 안정성과 분리를 이뤄냈습니다.", "Treated LLM outputs strictly as candidates and built a Gateway in Unreal to re-validate distance, target, inventory, etc., ensuring stability and separation of concerns.")}</p>
-                  </div>
-                  <ul className="text-game-muted text-xs space-y-1 list-disc list-inside">
-                    <li>검증 통과 시에만 StateTree / GAS / WorkOrder로 전달</li>
-                  </ul>
-                </div>
-                <div className="flex-1 min-h-[200px] bg-game-dark border border-game-muted/20 rounded flex items-center justify-center">
-                  <span className="text-game-muted text-sm">{t("📌 [이미지 삽입] Command Validation 다이어그램", "Command Validation Diagram")}</span>
-                </div>
+            
+            {/* 4. AI Command Gateway */}
+            <div className="bg-game-card p-8 rounded-xl border border-game-card/50 mb-8">
+              <h4 className="text-xl font-bold text-white mb-4">4. AI Command Gateway</h4>
+              
+              <div className="mb-6">
+                <p className="text-game-muted text-sm mb-2">
+                  {t("LLM의 환각(Hallucination)으로부터 게임 시스템의 안정성을 보호하기 위한 검증 계층을 설계한 과정입니다.", "The process of designing a validation layer to protect game stability from LLM hallucinations.")}
+                </p>
               </div>
 
-              <div className="bg-game-card p-8 rounded-xl border border-game-card/50 flex flex-col md:flex-row gap-8">
-                <div className="flex-1">
-                  <h4 className="text-xl font-bold text-white mb-2">6. Data-Driven Gameplay</h4>
-                  <div className="bg-game-dark p-4 rounded border border-game-muted/20 mb-4 text-sm">
-                    <p className="mb-2"><strong className="text-red-400">Problem:</strong> {t("새로운 무기나 콘텐츠를 추가할 때마다 방대한 코드 수정과 빌드 작업이 반복되었습니다.", "Adding new weapons or content required repetitive code modification and builds.")}</p>
-                    <p><strong className="text-green-400">Solution:</strong> {t("DataTable과 DataAsset 기반으로 Weapon Definition을 구성하여 게임 콘텐츠와 실행 로직을 완전히 분리했습니다. 무기별 Ability Set, Combo, Montage 등을 데이터화하여 빌드 없이 콘텐츠를 확장 가능하게 했습니다.", "Separated logic and content by creating Weapon Definitions via DataTable/DataAsset. Ability sets, combos, and montages became data, allowing content expansion without code builds.")}</p>
-                  </div>
+              <div className="bg-game-dark p-6 rounded-lg border border-game-muted/20 text-sm mb-6">
+                <p className="mb-3"><strong className="text-red-400">Problem:</strong> {t("LLM이 게임 상태를 무시하고 불가능한 명령(환각)을 생성하여 게임 안정성을 해칠 수 있었습니다.", "LLMs generated impossible commands (hallucinations) ignoring game state, breaking stability.")}</p>
+                <p><strong className="text-green-400">Solution:</strong> {t("LLM의 출력은 실제 게임 명령이 아닌 Command Candidate로만 취급하고, 언리얼 엔진 내부에서 거리, 대상, 인벤토리, 중복 여부 등을 재검증하는 'Gateway 구조'를 설계하여 안정성과 분리를 이뤄냈습니다.", "Treated LLM outputs strictly as candidates and built a Gateway in Unreal to re-validate distance, target, inventory, etc., ensuring stability and separation of concerns.")}</p>
+              </div>
+
+              <div className="w-full bg-white/5 border border-game-muted/20 rounded-xl overflow-hidden flex items-center justify-center">
+                <img src={aiCommandGatewayImg} alt="AI Command Gateway" className="w-full h-auto object-contain p-4" />
+              </div>
+            </div>
+
+            {/* 5. Data-Driven Gameplay */}
+            <div className="bg-game-card p-8 rounded-xl border border-game-card/50 mb-8">
+              <h4 className="text-xl font-bold text-white mb-4">5. Data-Driven Gameplay (DDD)</h4>
+              
+              <div className="mb-6">
+                <p className="text-game-muted text-sm mb-2">
+                  {t("새로운 무기나 아이템을 추가할 때 빌드 없이 확장 가능하도록 데이터 기반 구조를 설계했습니다.", "Designed a data-driven structure to allow adding new weapons or items without rebuilding.")}
+                </p>
+              </div>
+
+              <div className="bg-game-dark p-6 rounded-lg border border-game-muted/20 text-sm mb-6">
+                <p className="mb-3"><strong className="text-red-400">Problem:</strong> {t("새로운 무기나 콘텐츠를 추가할 때마다 방대한 코드 수정과 빌드 작업이 반복되었습니다.", "Adding new weapons or content required repetitive code modification and builds.")}</p>
+                <p><strong className="text-green-400">Solution:</strong> {t("DataTable과 DataAsset 기반으로 Weapon Definition 및 Item Definition을 구성하여 게임 콘텐츠와 실행 로직을 완전히 분리했습니다. 빌드 없이 에디터 내에서 데이터 설정만으로 콘텐츠를 확장 가능하게 했습니다.", "Separated logic and content by creating Definitions via DataTable/DataAsset. Allowed content expansion purely through data configuration in the editor without rebuilding.")}</p>
+              </div>
+
+              <div className="grid grid-cols-1 gap-6">
+                <div className="w-full bg-white/5 border border-game-muted/20 rounded-xl overflow-hidden flex flex-col items-center justify-center p-6">
+                  <span className="text-game-accent font-mono text-xs mb-4 text-left w-full">▼ Weapon Data-Driven Architecture</span>
+                  <img src={dddWeaponImg} alt="Weapon DDD" className="w-full h-auto object-contain" />
                 </div>
-                <div className="flex-1 min-h-[200px] bg-game-dark border border-game-muted/20 rounded flex items-center justify-center">
-                  <span className="text-game-muted text-sm">{t("📌 [이미지 삽입] Weapon Definition DataAsset 화면", "Weapon Definition DataAsset Capture")}</span>
+                <div className="w-full bg-white/5 border border-game-muted/20 rounded-xl overflow-hidden flex flex-col items-center justify-center p-6">
+                  <span className="text-game-accent font-mono text-xs mb-4 text-left w-full">▼ Item & Recipe Data-Driven Architecture</span>
+                  <img src={dddItemImg} alt="Item DDD" className="w-full h-auto object-contain" />
                 </div>
               </div>
             </div>
 
-            {/* 7. Combat & Hit Detection + 8. Animation */}
+            {/* 6 & 7. Combat & Animation */}
             <div className="bg-game-card p-8 rounded-xl border border-game-card/50 mb-12">
-              <h4 className="text-xl font-bold text-white mb-6">7 & 8. Combat, Hit Detection & Animation System</h4>
+              <h4 className="text-xl font-bold text-white mb-6">6 & 7. Combat, Hit Detection & Animation System</h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="flex flex-col">
                   <div className="w-full h-48 bg-game-dark border border-game-muted/20 rounded flex items-center justify-center mb-4">
@@ -223,10 +216,10 @@ GAS Ability (Execution)`}
               </div>
             </div>
 
-            {/* 9. Problem Solving */}
+            {/* 8. Problem Solving */}
             <div className="bg-game-dark p-8 rounded-xl border border-red-900/30 mb-12 relative overflow-hidden">
               <div className="absolute top-0 left-0 w-1 h-full bg-red-500"></div>
-              <h4 className="text-xl font-bold text-white mb-4">9. 디버깅 및 문제 해결 (StateTree Evaluator 노출 이슈)</h4>
+              <h4 className="text-xl font-bold text-white mb-4">8. 디버깅 및 문제 해결 (StateTree Evaluator 노출 이슈)</h4>
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="flex-1">
                   <p className="text-game-muted text-sm mb-4">
@@ -245,9 +238,9 @@ GAS Ability (Execution)`}
               </div>
             </div>
 
-            {/* 10. Competency Summary */}
-            <div className="bg-game-card p-8 rounded-xl border border-game-accent/30 text-center">
-              <h4 className="text-xl font-bold text-white mb-6">{t("10. 프로젝트를 통해 검증된 핵심 역량", "Key Competencies Demonstrated")}</h4>
+            {/* 9. Competency Summary */}
+            <div className="bg-game-card p-8 rounded-xl border border-game-accent/30 text-center mb-12">
+              <h4 className="text-xl font-bold text-white mb-6">{t("9. 프로젝트를 통해 검증된 핵심 역량", "Key Competencies Demonstrated")}</h4>
               <div className="flex flex-wrap justify-center gap-4 text-sm font-mono">
                 <span className="bg-blue-900/30 text-blue-300 px-4 py-2 rounded-full border border-blue-900/50">C++ Gameplay Logic</span>
                 <span className="bg-purple-900/30 text-purple-300 px-4 py-2 rounded-full border border-purple-900/50">GAS & StateTree</span>
@@ -259,7 +252,7 @@ GAS Ability (Execution)`}
 
           </ProjectSection>
         );
-      case 'palworld':
+case 'palworld':
         return (
           <ProjectSection 
             id="project-palworld" 
