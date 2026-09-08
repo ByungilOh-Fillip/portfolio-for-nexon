@@ -77,7 +77,19 @@ const palArchChart = `flowchart TD
 
 const socketArchChart = `flowchart LR\n    A["Client"] -->|"Socket Request"| B["Server"]\n    B -->|"Business Request"| C["DAO"]\n    C --> D[("MariaDB")]\n\n    D --> C\n    C --> B\n    B -->|"Socket Response"| A`;
 
-const socketFlowChart = `sequenceDiagram\n    participant Client\n    participant Server\n\n    Client->>Server: "1" (Read Request)\n    Note over Server: TODO Fetch (DB)\n    Server-->>Client: TODO Data\n    Server-->>Client: EOF (End of Message)\n\n    Client->>Server: "3" (Create Request)\n    Note over Server: TODO Insert (DB)\n    Server-->>Client: "Success" Message\n    Server-->>Client: EOF (End of Message)`;
+const socketFlowChart = `sequenceDiagram
+    participant Client
+    participant Server
+
+    Client->>Server: 1 (Read Request)
+    Note over Server: TODO Fetch (DB)
+    Server-->>Client: TODO Data
+    Server-->>Client: EOF (End of Message)
+
+    Client->>Server: 3 (Create Request)
+    Note over Server: TODO Insert (DB)
+    Server-->>Client: Success Message
+    Server-->>Client: EOF (End of Message)`;
 
 const materialArchChart = `flowchart LR
     A["React UI"] --> B["React Flow<br/>Material Graph"]

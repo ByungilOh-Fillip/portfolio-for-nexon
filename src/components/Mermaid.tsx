@@ -7,36 +7,62 @@ mermaid.initialize({
   securityLevel: 'loose',
 });
 
-// A simple global queue to ensure Mermaid renders sequentially
+// A global queue to ensure Mermaid renders sequentially
 let renderQueue = Promise.resolve();
 
 export default function Mermaid({ chart }: { chart: string }) {
   const [svg, setSvg] = useState<string>('');
   const [errorMsg, setErrorMsg] = useState<string>('');
-  const id = useRef(`mermaid-${Math.random().toString(36).substr(2, 9)}`);
+  // Generate a strictly unique ID to prevent DOM conflicts during rapid re-renders
+  const id = useRef(`mermaid-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`);
 
   useEffect(() => {
     let isMounted = true;
+    
+    // Clear previous errors when chart changes
+    setErrorMsg('');
 
-    const renderChart = async () => {
-      try {
-        // Wait for the previous render to finish
-        const { svg: renderedSvg } = await mermaid.render(id.current, chart);
-        if (isMounted) {
-          setSvg(renderedSvg);
+    const enqueueRender = (retryCount = 0) => {
+      const task = async () => {
+        // If unmounted while waiting in queue, skip doing work
+        if (!isMounted) return;
+
+        try {
+          const { svg: renderedSvg } = await mermaid.render(id.current, chart);
+          
+          if (isMounted) {
+            setSvg(renderedSvg);
+            setErrorMsg('');
+          }
+        } catch (error) {
+          // If it's a transient error and we haven't exceeded retries
+          if (retryCount < 1 && isMounted) {
+            // Wait briefly to allow DOM to settle
+            await new Promise(resolve => setTimeout(resolve, 200));
+            // Re-enqueue this chart rendering to the end of the global queue
+            if (isMounted) enqueueRender(retryCount + 1);
+            return;
+          }
+
+          console.error('Mermaid rendering error:', error);
+          if (isMounted) {
+            setErrorMsg(error instanceof Error ? error.message : String(error));
+          }
         }
-      } catch (error) {
-        console.error('Mermaid rendering error:', error);
-        if (isMounted) {
-          setErrorMsg(error instanceof Error ? error.message : String(error));
-        }
-      }
+      };
+
+      // Chain the task onto the global queue
+      renderQueue = renderQueue.then(task);
     };
 
-    renderQueue = renderQueue.then(renderChart);
+    // Start the first attempt
+    enqueueRender(0);
 
     return () => {
       isMounted = false;
+      // In case Mermaid injected any rogue style/svg elements with this ID, attempt to clean up
+      const element = document.getElementById(id.current);
+      if (element) element.remove();
     };
   }, [chart]);
 
