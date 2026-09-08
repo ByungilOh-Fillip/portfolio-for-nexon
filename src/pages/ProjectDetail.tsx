@@ -4,11 +4,12 @@ import { ArrowLeft } from 'lucide-react';
 import { ProjectSection } from '../components/ProjectSection';
 import Mermaid from '../components/Mermaid';
 import { useLanguage } from '../contexts/LanguageContext';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import erdMemoryImg from '../assets/erd_memory.png';
 import materialHelperHeroImg from '../assets/material_helper_hero.png';
 import aireMaterialUsageImg from '../assets/aire_material_usage.png';
 import palworldIssueImg from '../assets/palworld_issue.png';
+import materialHelperSandboxImg from '../assets/material_helper_sandbox.png';
 
 const aireGatewayChart = `flowchart LR
     A["BT_AI (Behavior Tree)"] -->|Task Request| B["AI Controller"]
@@ -87,6 +88,7 @@ const materialArchChart = `flowchart LR
 
 
 export default function ProjectDetail() {
+  const [selectedImg, setSelectedImg] = useState<string | null>(null);
   const { id } = useParams<{ id: string }>();
   const { t } = useLanguage();
 
@@ -240,7 +242,7 @@ export default function ProjectDetail() {
                 rel="noopener noreferrer" 
                 className="w-full h-64 md:h-[500px] bg-black border border-game-muted/20 rounded-xl overflow-hidden flex items-center justify-center relative group"
               >
-                <img src={erdMemoryImg} alt="Memory ERD" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <img src={erdMemoryImg} alt="Memory ERD" onClick={(e) => { e.preventDefault(); setSelectedImg(erdMemoryImg); }} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-pointer" />
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
                   <span className="text-white font-bold text-lg font-mono tracking-wide">Click to view on ERDCloud</span>
                 </div>
@@ -513,7 +515,7 @@ case 'palworld':
 
               {imgPalworldIssue && (
                 <div className="w-full bg-black border border-game-muted/20 rounded-xl overflow-hidden mt-6">
-                  <img src={imgPalworldIssue} alt="GitHub Issue / PR" className="w-full h-auto object-contain" />
+                  <img src={imgPalworldIssue} alt="GitHub Issue / PR" onClick={() => setSelectedImg(imgPalworldIssue)} className="w-full h-auto object-contain cursor-pointer hover:opacity-90 transition-opacity" />
                 </div>
               )}
             </div>
@@ -740,19 +742,28 @@ case 'material':
               <div className="flex-1">
                 <h4 className="text-xl font-bold text-game-accent mb-4">AIRE 프로젝트 UI 개발 적용</h4>
                 <p className="text-game-muted text-sm leading-relaxed mb-4">
-                  {t("직접 개발한 Material Helper 툴이 단순한 토이 프로젝트에 그치지 않도록, 실제 <strong>AIRE</strong> 프로젝트의 동적인 UI(M_Hunger 출렁이는 파도 효과)를 제작하는 데 활용했습니다.", "To ensure this wasn't just a toy project, I actively used the Material Helper tool to develop dynamic UI elements (like the waving 'M_Hunger' fluid effect) for the actual <strong>AIRE</strong> project.")}
+                  {t("직접 개발한 Material Helper 툴이 단순한 토이 프로젝트에 그치지 않도록, 실제 ", "To ensure this wasn't just a toy project, I actively used the Material Helper tool to develop dynamic UI elements (like the waving 'M_Hunger' fluid effect) for the actual ")}<strong className="text-white">AIRE</strong>{t(" 프로젝트의 동적인 UI(M_Hunger 출렁이는 파도 효과)를 제작하는 데 활용했습니다.", " project.")}
                 </p>
                 <p className="text-game-muted text-sm leading-relaxed">
-                  {t("웹에서 Shader 로직을 먼저 프로토타이핑하여 시각적 결과(Wave, Masking)를 확인한 뒤, T3D Exporter를 통해 UE5로 즉시 넘겨 게임에 적용했습니다. <strong>툴 개발이 실제 게임 개발의 생산성 향상으로 직결된 성공적인 파이프라인 경험</strong>입니다.", "I prototyped the shader logic on the web to visually verify the wave and masking effects, then immediately exported it to UE5 via the T3D Exporter. This is a successful pipeline experience where <strong>tool development directly led to increased productivity in actual game development</strong>.")}
+                  {t("웹에서 Shader 로직을 먼저 프로토타이핑하여 시각적 결과(Wave, Masking)를 확인한 뒤, T3D Exporter를 통해 UE5로 즉시 넘겨 게임에 적용했습니다. ", "I prototyped the shader logic on the web to visually verify the wave and masking effects, then immediately exported it to UE5 via the T3D Exporter. This is a successful pipeline experience where ")}<strong className="text-white">{t("툴 개발이 실제 게임 개발의 생산성 향상으로 직결된 성공적인 파이프라인 경험", "tool development directly led to increased productivity in actual game development")}</strong>{t("입니다.", ".")}
                 </p>
               </div>
               <div className="flex-1 w-full relative group">
                 <div className="bg-black/50 border border-game-muted/20 rounded-xl p-2 overflow-hidden">
-                  <img src={aireMaterialUsageImg} alt="AIRE Material Usage" className="w-full h-auto rounded-lg" />
+                  <img src={aireMaterialUsageImg} alt="AIRE Material Usage" onClick={() => setSelectedImg(aireMaterialUsageImg)} className="w-full h-auto rounded-lg cursor-pointer hover:opacity-90 transition-opacity" />
                 </div>
               </div>
             </div>
             
+
+            <div className="w-full bg-black/50 border border-game-muted/20 rounded-xl p-2 overflow-hidden mb-12">
+              <img 
+                src={materialHelperSandboxImg} 
+                alt="Material Helper Sandbox" 
+                className="w-full h-auto rounded-lg cursor-pointer hover:opacity-90 transition-opacity" 
+                onClick={() => setSelectedImg(materialHelperSandboxImg)}
+              />
+            </div>
           </ProjectSection>
         );
       default:
@@ -776,6 +787,19 @@ case 'material':
       >
         {renderProjectContent()}
       </motion.div>
+
+      {selectedImg && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 cursor-zoom-out"
+          onClick={() => setSelectedImg(null)}
+        >
+          <img 
+            src={selectedImg} 
+            className="max-w-full max-h-full object-contain rounded-lg" 
+            alt="Enlarged" 
+          />
+        </div>
+      )}
     </div>
   );
 }
