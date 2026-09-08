@@ -1,12 +1,23 @@
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Briefcase } from 'lucide-react';
 
 import { useLanguage } from '../contexts/LanguageContext';
 
 export default function Hero() {
   const { t } = useLanguage();
+  const [showToast, setShowToast] = useState(false);
+
+  const handleCopyEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigator.clipboard.writeText('dhquddlf5@gmail.com').then(() => {
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 2000);
+    });
+  };
+
   return (
-    <section className="min-h-screen flex flex-col justify-center items-start px-8 md:px-24 py-20">
+    <section className="min-h-screen flex flex-col justify-center items-start px-8 md:px-24 py-20 relative">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -25,16 +36,30 @@ export default function Hero() {
         </p>
 
         <div className="flex gap-6">
-          <a href="https://github.com/ByungilOh-Fillip" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-game-muted hover:text-white transition-colors">
+          <a href="https://github.com/ByungilOh-Fillip" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-game-muted hover:text-white transition-colors cursor-pointer">
             <Briefcase size={24} />
             <span>GitHub</span>
           </a>
-          <a href="mailto:dhquddlf5@gmail.com" className="flex items-center gap-2 text-game-muted hover:text-white transition-colors">
+          <button onClick={handleCopyEmail} className="flex items-center gap-2 text-game-muted hover:text-white transition-colors cursor-pointer">
             <Mail size={24} />
             <span>Contact</span>
-          </a>
+          </button>
         </div>
       </motion.div>
+
+      <AnimatePresence>
+        {showToast && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, x: '-50%' }}
+            animate={{ opacity: 1, y: 0, x: '-50%' }}
+            exit={{ opacity: 0, y: 50, x: '-50%' }}
+            className="fixed bottom-10 left-1/2 flex items-center gap-2 bg-game-accent text-white px-6 py-3 rounded-full shadow-lg z-[100] font-bold"
+          >
+            <Mail size={18} />
+            {t('이메일 주소가 복사되었습니다!', 'Email address copied!')}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
