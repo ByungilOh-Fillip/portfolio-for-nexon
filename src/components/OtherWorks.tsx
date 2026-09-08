@@ -8,7 +8,7 @@ export default function OtherWorks() {
   const works = [
     { name: 'Algorithm', tech: 'JAVA/C++', desc: t('문제 해결 능력을 위한 알고리즘 학습 및 풀이', 'Algorithm study and problem-solving practice') },
     { name: 'CS Study', tech: 'OS / Network / DB', desc: t('컴퓨터 공학 기초 개념 심화 학습', 'In-depth study of computer science fundamentals') },
-    { name: 'GPS Attendance', tech: 'Kotlin', desc: t('위치 기반 출석 체크 애플리케이션 프로토타입', 'Location-based attendance check application prototype') },
+    { name: 'GPS Attendance', tech: 'Spring, MyBatis', desc: t('위치 기반 출석 체크 애플리케이션 프로토타입', 'Location-based attendance check application prototype') },
     { name: 'Development Experiments', tech: 'Various', desc: t('다양한 기술 스택 R&D 및 최적화 테스트', 'Various tech stack R&D and optimization tests') },
   ];
 
