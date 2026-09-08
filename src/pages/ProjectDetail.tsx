@@ -35,7 +35,7 @@ export default function ProjectDetail() {
 
   return (
     <div className="pt-24 pb-20 px-6 min-h-screen">
-      <div className="max-w-4xl mx-auto">
+      <div className="w-full mx-auto">
         <Link 
           to="/" 
           className="inline-flex items-center text-game-muted hover:text-game-accent mb-8 transition-colors"
