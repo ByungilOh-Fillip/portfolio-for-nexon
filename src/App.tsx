@@ -15,9 +15,9 @@ function Nav() {
         {isHome && (
           <div className="hidden md:flex gap-6 text-sm font-mono">
             <a href="#about" className="hover:text-game-accent transition-colors">01. {t('소개', 'About')}</a>
-            <a href="#skills" className="hover:text-game-accent transition-colors">02. {t('기술', 'Skills')}</a>
-            <a href="#projects" className="hover:text-game-accent transition-colors">03. {t('프로젝트', 'Projects')}</a>
-            <a href="#other" className="hover:text-game-accent transition-colors">04. {t('기타', 'Other')}</a>
+            <a href="#projects" className="hover:text-game-accent transition-colors">02. {t('프로젝트', 'Projects')}</a>
+            <a href="#other" className="hover:text-game-accent transition-colors">03. {t('기타', 'Other')}</a>
+            <a href="#skills" className="hover:text-game-accent transition-colors">04. {t('기술', 'Skills')}</a>
           </div>
         )}
         <button onClick={toggleLanguage} className="text-xs font-bold border border-game-muted/50 px-2 py-1 rounded hover:bg-game-card transition-colors">

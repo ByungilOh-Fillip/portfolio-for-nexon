@@ -50,7 +50,7 @@ export default function ProjectList() {
         transition={{ duration: 0.5 }}
       >
         <h2 className="text-3xl font-bold mb-12 flex items-center gap-4 text-white">
-          <span className="text-game-accent font-mono text-xl">03.</span> {t('프로젝트', 'Projects')}
+          <span className="text-game-accent font-mono text-xl">02.</span> {t('프로젝트', 'Projects')}
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -74,6 +74,9 @@ export default function ProjectList() {
                         {tag}
                       </span>
                     ))}
+                  </div>
+                  <div className="mt-6 flex items-center gap-2 text-game-accent font-bold transition-transform duration-300 group-hover:translate-x-2">
+                    {t('프로젝트 상세 보기', 'Click to View Detail')} <span>➔</span>
                   </div>
                 </div>
               </div>

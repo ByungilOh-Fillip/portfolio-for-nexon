@@ -61,7 +61,7 @@ export default function Skills() {
         transition={{ duration: 0.5 }}
       >
         <h2 className="text-3xl font-bold mb-12 flex items-center gap-4 text-white">
-          <span className="text-game-accent font-mono text-xl">02.</span> {t('기술', 'Skills')}
+          <span className="text-game-accent font-mono text-xl">04.</span> {t('기술', 'Skills')}
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
