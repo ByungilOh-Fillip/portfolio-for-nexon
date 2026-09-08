@@ -5,11 +5,14 @@ import { ProjectSection } from '../components/ProjectSection';
 import Mermaid from '../components/Mermaid';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useEffect, useState } from 'react';
-import erdMemoryImg from '../assets/erd_memory.png';
-import materialHelperHeroImg from '../assets/material_helper_hero.png';
-import aireMaterialUsageImg from '../assets/aire_material_usage.png';
-import palworldIssueImg from '../assets/palworld_issue.png';
-import materialHelperSandboxImg from '../assets/material_helper_sandbox.png';
+import erdMemoryImg from '../assets/other_projects/erd_memory.png';
+import materialHelperHeroImg from '../assets/material_helper/material_helper_hero.png';
+import aireMaterialUsageImg from '../assets/aire/aire_material_usage.png';
+import palworldIssueImg from '../assets/other_projects/palworld_issue.png';
+import materialHelperSandboxImg from '../assets/material_helper/material_helper_sandbox.png';
+import imgAireHitDetection from '../assets/aire/aire_hit_detection.jpg';
+import imgAireAnimNotify from '../assets/aire/aire_anim_notify.png';
+import imgAireDodgeCurve from '../assets/aire/aire_dodge_curve.png';
 
 const aireGatewayChart = `flowchart LR
     A["BT_AI (Behavior Tree)"] -->|Task Request| B["AI Controller"]
@@ -111,17 +114,7 @@ export default function ProjectDetail() {
   const renderProjectContent = () => {
     switch(id) {
       case 'aire':
-
-
-
-
-
-
-
-        const imgAireHitDetection = "";
-        const imgAireAnimNotify = "";
         const imgAireDebug = "";
-
         return (
           <ProjectSection 
             id="project-aire" 
@@ -312,17 +305,17 @@ export default function ProjectDetail() {
             {/* 6 & 7. Combat & Animation */}
             <div className="bg-game-card p-8 rounded-xl border border-game-card/50 mb-12">
               <h4 className="text-xl font-bold text-white mb-6">6 & 7. Combat, Hit Detection & Animation System</h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div className="flex flex-col">
                   {imgAireHitDetection && (
                   <div className="w-full bg-black border border-game-muted/20 rounded overflow-hidden mb-4">
                     <img src={imgAireHitDetection} alt="Continuous Hit Detection" className="w-full h-auto object-contain" />
                   </div>
                 )}
-                  <h5 className="font-bold text-game-accent mb-2">Continuous Hit Detection</h5>
+                  <h5 className="font-bold text-game-accent mb-2">Continuous Hit Detection & Optimization</h5>
                   <div className="bg-game-dark p-4 rounded border border-game-muted/20 text-sm flex-grow">
-                    <p className="mb-2"><strong className="text-red-400">Problem:</strong> {t("빠르게 움직이는 무기의 경우, 단일 Collision 검사만으로는 프레임 간격 사이에서 Hit 판정이 누락되는 문제가 발생했습니다.", "Fast-moving weapons missed hit detections between frames when using a single collision check.")}</p>
-                    <p><strong className="text-green-400">Solution:</strong> {t("이전 프레임과 현재 프레임의 무기 Base/Tip 위치를 보간(Interpolation)하고, Substep 기반의 연속적인 Capsule Sweep을 통해 실제 무기 이동 궤적 전체를 누락 없이 판정하도록 구현했습니다.", "Interpolated previous and current weapon positions and used continuous Capsule Sweep to calculate the entire trajectory, eliminating missed hits.")}</p>
+                    <p className="mb-2"><strong className="text-red-400">Problem:</strong> {t("빠르게 움직이는 무기는 프레임 사이에서 Hit 판정이 누락될 수 있어 세밀한 궤적 보간(Substep)이 필요하지만, 이를 모든 캐릭터에 일괄 적용하면 불필요한 연산 비용이 발생합니다.", "Fast-moving weapons miss hits between frames, requiring sub-step interpolation. However, applying this to all characters causes unnecessary performance overhead.")}</p>
+                    <p><strong className="text-green-400">Solution:</strong> {t("무기 특성에 맞춰 충돌 판정을 최적화했습니다. 빠른 공격을 하는 동료(마코)는 Substep 보간 처리를 적용했지만, 플레이어는 애니메이션이 비교적 느린 대검을 사용하여 궤적이 충분히 넓기 때문에 이전 프레임과 현재 위치를 잇는 단일 선분(Segment) 스윕만으로 처리했습니다. 결과적으로 판정 누락 없이 연산량을 크게 줄였습니다.", "Optimized hit detection based on weapon speed. While the companion (Mako) uses sub-step interpolation for fast attacks, the player's slower Greatsword relies on a simple single-segment sweep between frames. This provided accurate hit detection while significantly reducing computation cost.")}</p>
                   </div>
                 </div>
                 <div className="flex flex-col">
@@ -335,6 +328,18 @@ export default function ProjectDetail() {
                   <div className="bg-game-dark p-4 rounded border border-game-muted/20 text-sm flex-grow">
                     <p className="mb-2"><strong className="text-red-400">Problem:</strong> {t("공격 연출 애니메이션과 실제 타격 판정/콤보 로직의 타이밍이 어긋나는 경우가 빈번했습니다.", "Animation visuals often desynchronized with actual hit detection and combo logic timing.")}</p>
                     <p><strong className="text-green-400">Solution:</strong> {t("Linked Anim Layer와 Montage로 유연한 전환을 확보하고, AnimNotify State를 커스텀하여 애니메이션 툴 내에서 시각적으로 Combo Window와 Attack Timing을 제어함으로써 코드와 연출을 완벽히 동기화했습니다.", "Customized AnimNotify States within Montages to visually control combo windows and attack timing inside the animation editor, perfectly syncing logic with visuals.")}</p>
+                  </div>
+                </div>
+                <div className="flex flex-col">
+                  {imgAireDodgeCurve && (
+                  <div className="w-full bg-black border border-game-muted/20 rounded overflow-hidden mb-4">
+                    <img src={imgAireDodgeCurve} alt="Dodge Roll Curve" className="w-full h-auto object-contain" />
+                  </div>
+                )}
+                  <h5 className="font-bold text-game-accent mb-2">Natural Dodge Roll</h5>
+                  <div className="bg-game-dark p-4 rounded border border-game-muted/20 text-sm flex-grow">
+                    <p className="mb-2"><strong className="text-red-400">Problem:</strong> {t("구르기(Dodge)의 인게임 동작 시 캐릭터의 실제 이동 속도와 모션이 맞지 않아 움직임이 매우 어색했습니다.", "The in-game dodge roll looked unnatural because the character's movement speed did not match the animation motion.")}</p>
+                    <p><strong className="text-green-400">Solution:</strong> {t("Unreal Engine의 Curve 데이터를 응용하여 구르기 모션 프레임에 맞춰 이동 속도 변화를 세밀하게 제어함으로써, 물리적으로 자연스럽고 역동적인 구르기 동작을 완성했습니다.", "Applied Unreal Engine Curve data to finely control movement speed variations according to the rolling motion frames, creating a physically natural and dynamic dodge action.")}</p>
                   </div>
                 </div>
               </div>
@@ -750,8 +755,8 @@ case 'material':
 
             {/* 5. 실무 적용 사례 (Real-world Application) */}
             <h3 className="text-2xl font-bold mb-6 text-white border-b border-game-muted/30 pb-4">{t("5. 실무 적용 사례 (Real-world Application)", "5. Real-world Application")}</h3>
-            <div className="bg-game-card p-8 rounded-xl border border-game-card/50 mb-12 flex flex-col gap-8">
-              <div className="flex-1">
+            <div className="bg-game-card p-8 rounded-xl border border-game-card/50 mb-12">
+              <div className="mb-8">
                 <h4 className="text-xl font-bold text-game-accent mb-4">AIRE 프로젝트 UI 개발 적용</h4>
                 <p className="text-game-muted text-sm leading-relaxed mb-4">
                   {t("직접 개발한 Material Helper 툴이 단순한 토이 프로젝트에 그치지 않도록, 실제 ", "To ensure this wasn't just a toy project, I actively used the Material Helper tool to develop dynamic UI elements (like the waving 'M_Hunger' fluid effect) for the actual ")}<strong className="text-white">AIRE</strong>{t(" 프로젝트의 동적인 UI(M_Hunger 출렁이는 파도 효과)를 제작하는 데 활용했습니다.", " project.")}
@@ -760,21 +765,19 @@ case 'material':
                   {t("웹에서 Shader 로직을 먼저 프로토타이핑하여 시각적 결과(Wave, Masking)를 확인한 뒤, T3D Exporter를 통해 UE5로 즉시 넘겨 게임에 적용했습니다. ", "I prototyped the shader logic on the web to visually verify the wave and masking effects, then immediately exported it to UE5 via the T3D Exporter. This is a successful pipeline experience where ")}<strong className="text-white">{t("툴 개발이 실제 게임 개발의 생산성 향상으로 직결된 성공적인 파이프라인 경험", "tool development directly led to increased productivity in actual game development")}</strong>{t("입니다.", ".")}
                 </p>
               </div>
-              <div className="flex-1 w-full relative group">
-                <div className="bg-black/50 border border-game-muted/20 rounded-xl p-2 overflow-hidden">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="w-full bg-black/50 border border-game-muted/20 rounded-xl p-2 overflow-hidden">
                   <img src={aireMaterialUsageImg} alt="AIRE Material Usage" onClick={() => setSelectedImg(aireMaterialUsageImg)} className="w-full h-auto rounded-lg cursor-pointer hover:opacity-90 transition-opacity" />
                 </div>
+                <div className="w-full bg-black/50 border border-game-muted/20 rounded-xl p-2 overflow-hidden">
+                  <img 
+                    src={materialHelperSandboxImg} 
+                    alt="Material Helper Sandbox" 
+                    className="w-full h-auto rounded-lg cursor-pointer hover:opacity-90 transition-opacity" 
+                    onClick={() => setSelectedImg(materialHelperSandboxImg)}
+                  />
+                </div>
               </div>
-            </div>
-            
-
-            <div className="w-full bg-black/50 border border-game-muted/20 rounded-xl p-2 overflow-hidden mb-12">
-              <img 
-                src={materialHelperSandboxImg} 
-                alt="Material Helper Sandbox" 
-                className="w-full h-auto rounded-lg cursor-pointer hover:opacity-90 transition-opacity" 
-                onClick={() => setSelectedImg(materialHelperSandboxImg)}
-              />
             </div>
           </ProjectSection>
         );
