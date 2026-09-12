@@ -1,6 +1,6 @@
 import { useLanguage } from '../../contexts/LanguageContext';
-import { ProjectSection } from '../../components/ProjectSection';
-import Mermaid from '../../components/Mermaid';
+import { ProjectSection } from '../../components/ui/ProjectSection';
+import Mermaid from '../../components/ui/Mermaid';
 import imgAireHitDetection from '../../assets/aire/aire_hit_detection.jpg';
 import imgAireAnimNotify from '../../assets/aire/aire_anim_notify.png';
 import imgAireDodgeCurve from '../../assets/aire/aire_dodge_curve.png';

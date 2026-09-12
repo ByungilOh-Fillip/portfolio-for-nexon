@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Target, Search, Wrench, Bug, CheckCircle2, PlayCircle, Bot } from 'lucide-react';
 
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 export default function About() {
   const { t } = useLanguage();

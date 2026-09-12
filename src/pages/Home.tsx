@@ -1,8 +1,9 @@
-import Hero from '../components/Hero';
-import About from '../components/About';
-import Skills from '../components/Skills';
-import ProjectList from '../components/ProjectList';
-import OtherWorks from '../components/OtherWorks';
+import Hero from '../components/sections/Hero';
+import About from '../components/sections/About';
+import Skills from '../components/sections/Skills';
+import ProjectList from '../components/sections/ProjectList';
+import OtherWorks from '../components/sections/OtherWorks';
+import Awards from '../components/sections/Awards';
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <About />
       <ProjectList />
       <OtherWorks />
+      <Awards />
       <Skills />
     </>
   );

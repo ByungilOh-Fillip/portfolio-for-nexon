@@ -1,6 +1,6 @@
 import { useLanguage } from '../../contexts/LanguageContext';
-import { ProjectSection } from '../../components/ProjectSection';
-import Mermaid from '../../components/Mermaid';
+import { ProjectSection } from '../../components/ui/ProjectSection';
+import Mermaid from '../../components/ui/Mermaid';
 import materialHelperHeroImg from '../../assets/material_helper/material_helper_hero.png';
 import materialHelperSandboxImg from '../../assets/material_helper/material_helper_sandbox.png';
 import aireMaterialUsageImg from '../../assets/aire/aire_material_usage.png';

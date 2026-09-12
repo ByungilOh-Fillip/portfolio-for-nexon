@@ -1,6 +1,6 @@
 import { useLanguage } from '../../contexts/LanguageContext';
-import { ProjectSection } from '../../components/ProjectSection';
-import Mermaid from '../../components/Mermaid';
+import { ProjectSection } from '../../components/ui/ProjectSection';
+import Mermaid from '../../components/ui/Mermaid';
 import palworldIssueImg from '../../assets/other_projects/palworld_issue.png';
 
 
