@@ -59,7 +59,7 @@ export default function Awards() {
         transition={{ duration: 0.5 }}
       >
         <h2 className="text-3xl font-bold mb-12 flex items-center gap-4 text-white">
-          <span className="text-game-accent font-mono text-xl">04.</span> {t('수상 내역', 'Awards & Honors')}
+          <span className="text-game-accent font-mono text-xl">05.</span> {t('수상 내역', 'Awards & Honors')}
         </h2>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">

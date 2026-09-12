@@ -8,17 +8,21 @@ function Nav() {
   const location = useLocation();
   const isHome = location.pathname === '/';
 
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <nav className="fixed top-0 w-full bg-game-dark/80 backdrop-blur-md border-b border-game-card z-50 px-8 py-4 flex justify-between items-center">
       <Link to="/" className="font-mono font-bold text-xl text-white">Oh Byungil<span className="text-game-accent">.</span></Link>
       <div className="flex items-center gap-6">
         {isHome && (
           <div className="hidden md:flex gap-6 text-sm font-mono">
-            <a href="#about" className="hover:text-game-accent transition-colors">01. {t('소개', 'About')}</a>
-            <a href="#projects" className="hover:text-game-accent transition-colors">02. {t('프로젝트', 'Projects')}</a>
-            <a href="#other" className="hover:text-game-accent transition-colors">03. {t('기타', 'Other')}</a>
-            <a href="#awards" className="hover:text-game-accent transition-colors">04. {t('수상', 'Awards')}</a>
-            <a href="#skills" className="hover:text-game-accent transition-colors">05. {t('기술', 'Skills')}</a>
+            <button onClick={() => scrollTo('about')} className="hover:text-game-accent transition-colors">01. {t('소개', 'About')}</button>
+            <button onClick={() => scrollTo('projects')} className="hover:text-game-accent transition-colors">02. {t('프로젝트', 'Projects')}</button>
+            <button onClick={() => scrollTo('other')} className="hover:text-game-accent transition-colors">03. {t('기타', 'Other')}</button>
+            <button onClick={() => scrollTo('skills')} className="hover:text-game-accent transition-colors">04. {t('기술', 'Skills')}</button>
+            <button onClick={() => scrollTo('awards')} className="hover:text-game-accent transition-colors">05. {t('수상', 'Awards')}</button>
           </div>
         )}
         <button onClick={toggleLanguage} className="text-xs font-bold border border-game-muted/50 px-2 py-1 rounded hover:bg-game-card transition-colors">

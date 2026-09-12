@@ -12,8 +12,8 @@ export default function Home() {
       <About />
       <ProjectList />
       <OtherWorks />
-      <Awards />
       <Skills />
+      <Awards />
     </>
   );
 }
